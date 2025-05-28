@@ -18,15 +18,12 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDate date;
     private Double amount;
-    private String description;
 
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<InvoiceDetail> details = new ArrayList<>();
-
-    @JoinColumn(name = "cliente_id")
-    private Client cliente;
+    // Agregá más campos si hace falta
 }
+
 
 
 

@@ -15,37 +15,39 @@ import java.util.Optional;
 public class ProductService {
 
     @Autowired
-    private ProductRepository clienteRepository;
+    private ProductRepository productRepository;
 
     @Transactional
-    public Product saveProduct(Product product){}}
-        return
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
 
     public List<Product> findAllProducts() {
-        return ProductRepository.findAll();
+        return productRepository.findAll();
     }
 
     public Optional<Product> findProductById(Long id) {
-        return clienteRepository.findById(id);
+        return productRepository.findById(id);
     }
 
     @Transactional
-    public Client updateClient (Longid, Product updateClient){
-        Product existingProduct = ProductRepository.findBY; id(id)
-                .orElseThrow(() -> new ResourceNotFoundException("cLIENTE con ID"+ id + " no encontrado para actualizar"));
+    public Product updateProduct(Long id, Product updateProduct) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto con ID " + id + " no encontrado."));
 
-        existingProduct.setFirstname(updateProduct.getName());
-        existingProduct.setFirstname(updateProduct.getDescription());
-        existingClient.setFirstname(updateProduct.getprice());
-        existingClient.setFirstname (updateProduct.getstock());
+        existingProduct.setName(updateProduct.getName());
+        existingProduct.setDescription(updateProduct.getDescription());
+        existingProduct.setPrice(updateProduct.getPrice());
+        existingProduct.setStock(updateProduct.getStock());
 
-        return clientRepository.save(existingProduct);
-        @Transactional
-        public void deleteProduct;(Long) id) {
-            if (!ProductRepository.deleteById(id)) {
-                Throw new ResourceNotFoundException ("Cliente con ID " + id + "no encontrado para eliminar");
-            }
-            productRepository.deleteById(id);
-        }
-
+        return productRepository.save(existingProduct);
     }
+
+    @Transactional
+    public void deleteProductById(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Producto con ID " + id + " no encontrado.");
+        }
+        productRepository.deleteById(id);
+    }
+}

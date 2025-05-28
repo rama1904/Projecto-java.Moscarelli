@@ -31,6 +31,6 @@ public class Product {
 
     // Relación con detalles de factura
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<InvoiceDetails> detallesFactura;
+    private List<InvoiceDetail> detallesFactura;
 }
 
